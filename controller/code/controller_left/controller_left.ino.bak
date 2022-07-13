@@ -117,9 +117,6 @@ void initWiFi(){
 
 
 void setup(){
-   if(debug){
-    Serial.begin(9600);
-  }
   //firstly establish wifi connection
   initWiFi();
   UDP.begin(UDPPort);
@@ -138,7 +135,9 @@ void setup(){
   pinMode(BBtn,INPUT_PULLUP);
   pinMode(ABtn,INPUT_PULLUP);
   pinMode(SystemBtn,INPUT_PULLUP);
-
+  if(debug){
+    Serial.begin(9600);
+  }
 }
 
 
