@@ -185,7 +185,6 @@ namespace DesktopServer
             IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, port);
             byte[] data = client.EndReceive(res, ref RemoteIpEndPoint);
             client.BeginReceive(new AsyncCallback(DataReceived), null);
-            MessageBox.Show(System.Text.Encoding.UTF8.GetString(data)+"\r\n"+ RemoteIpEndPoint.Address.ToString());
 
             processUDP(RemoteIpEndPoint.Address.ToString(), System.Text.Encoding.UTF8.GetString(data));
         }
@@ -193,12 +192,17 @@ namespace DesktopServer
         private void processUDP(string ip, string data)
         {
             if (data == "") return;
+            if (data == "VR") return;
+            //MessageBox.Show(ip + "\r\n" + data);
             if (data[0] != '[') return;
             string type = "";
+            string content = "";
+            int j = 0;
             for(int i = 1; i < data.Length; i++)
             {
                 if (data[i] == ']')
                 {
+                    j = i+1;
                     break;
                 }
                 else
@@ -206,12 +210,80 @@ namespace DesktopServer
                     type+=data[i];
                 }
             }
+            for(int k=j;k<data.Length; k++)
+            {
+                content+=data[k];
+            }
             if (type == "device")
             {
-                MessageBox.Show("Found device at " + ip);
+                bool found = false;
+                for(int i = 0; i < ips.count; i++)
+                {
+                    if (ip == ips.ip[i])
+                    {
+                        found = true;
+                        ips.status[i] = 1;
+                        ips.deviceName[i] = content;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    ips.ip[ips.count]=ip;
+                    ips.status[ips.count] = 1;
+                    ips.deviceName[ips.count] = content;
+                    ips.count++;
+                }
             }
+            else if(type == "Rssi")
+            {
+                for(int i = 0; i < ips.count; i++)
+                {
+                    if (ip == ips.ip[i])
+                    {
+                        int Rssi= Int32.Parse(content);
+                        if (Rssi < 0 && Rssi > -70)
+                        {
+                            Rssi = 20;
+                        }
+                        else if (Rssi < -90)
+                        {
+                            Rssi = 0;
+                        }
+                        else if (Rssi == 0)
+                        {
+                            Rssi = 0;
+                        }
+                        else
+                        {
+                            Rssi += 90;
+                        }
+                        if (Rssi < 0)
+                        {
+                            Rssi = 0;
+                        }else if (Rssi > 20)
+                        {
+                            Rssi = 20;
+                        }
 
+                        string deviceName=ips.deviceName[i];
+                        if (deviceName == "controllerLeft")
+                        {
+                            this.Invoke(new MethodInvoker(delegate ()
+                            {
+                                progressBarControllerLeft.Value = Rssi;
+                            }));
+                        }
+                        
+
+                        break;
+                    }
+                }
+            }
+                
         }
+
+        
 
         private void timerDetect_Tick(object sender, EventArgs e)
         {

@@ -1,6 +1,7 @@
 /*
 THIS CODE IS FOR ESP8266!!!!
 only for testing
+this code makes reference to HadesVR-main
 */
 
 #include <Wire.h>
@@ -116,12 +117,12 @@ void initWiFi(){
 
 
 void setup(){
-   if(debug){
+  if(debug){
     Serial.begin(115200);
   }
   //firstly establish wifi connection
   initWiFi();
-  //UDP.begin(UDPPort);
+  UDP.begin(UDPPort);
   //mpuSetup();
   /*
   pinMode(TrackPadX,INPUT);
@@ -162,7 +163,7 @@ void loop(){
     }
     previousMillisWiFi = currentMillis;
   }
-  if(!UDPConnected){
+  if(!UDPConnected||HIGH){
     int packetSize = UDP.parsePacket();
     if (packetSize)
     {
@@ -171,7 +172,11 @@ void loop(){
       {
         incomingPacket[len] = 0;
       }
-      if(incomingPacket == "VR"){
+      if(debug&&!UDPConnected){
+        Serial.print("detected computer on ");
+        Serial.println(UDP.remoteIP());
+      }
+      if(String(incomingPacket) == "VR"){
         UDPConnected = HIGH;
         serverIP=UDP.remoteIP();
         serverPort=String(UDP.remotePort()).toInt();

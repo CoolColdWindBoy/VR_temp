@@ -35,11 +35,13 @@
             this.timerUDPSend = new System.Windows.Forms.Timer(this.components);
             this.timerPing = new System.Windows.Forms.Timer(this.components);
             this.timerDetectLocalIP = new System.Windows.Forms.Timer(this.components);
+            this.labelControllerLeft = new System.Windows.Forms.Label();
+            this.progressBarControllerLeft = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(639, 95);
+            this.button1.Location = new System.Drawing.Point(681, 51);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 35);
             this.button1.TabIndex = 0;
@@ -49,7 +51,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(639, 136);
+            this.button2.Location = new System.Drawing.Point(681, 92);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(89, 35);
             this.button2.TabIndex = 1;
@@ -59,7 +61,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(274, 95);
+            this.textBox1.Location = new System.Drawing.Point(12, 103);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(213, 201);
@@ -83,11 +85,30 @@
             this.timerDetectLocalIP.Interval = 10000;
             this.timerDetectLocalIP.Tick += new System.EventHandler(this.timerDetectLocalIP_Tick);
             // 
+            // labelControllerLeft
+            // 
+            this.labelControllerLeft.AutoSize = true;
+            this.labelControllerLeft.Location = new System.Drawing.Point(314, 82);
+            this.labelControllerLeft.Name = "labelControllerLeft";
+            this.labelControllerLeft.Size = new System.Drawing.Size(68, 13);
+            this.labelControllerLeft.TabIndex = 3;
+            this.labelControllerLeft.Text = "controllerLeft";
+            // 
+            // progressBarControllerLeft
+            // 
+            this.progressBarControllerLeft.Location = new System.Drawing.Point(388, 82);
+            this.progressBarControllerLeft.Maximum = 20;
+            this.progressBarControllerLeft.Name = "progressBarControllerLeft";
+            this.progressBarControllerLeft.Size = new System.Drawing.Size(103, 13);
+            this.progressBarControllerLeft.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.progressBarControllerLeft);
+            this.Controls.Add(this.labelControllerLeft);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -107,6 +128,8 @@
         private System.Windows.Forms.Timer timerUDPSend;
         private System.Windows.Forms.Timer timerPing;
         private System.Windows.Forms.Timer timerDetectLocalIP;
+        private System.Windows.Forms.Label labelControllerLeft;
+        private System.Windows.Forms.ProgressBar progressBarControllerLeft;
     }
 }
 
