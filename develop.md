@@ -10,7 +10,7 @@ progress:
 editing (don't edit the directory/file while others doing):
   Maverick:
     /controller/code/controller_left
-
+    /VRDriver
 
 
 
@@ -26,6 +26,7 @@ things to do:
 for desktop server:
   scan 192.168.1.x with https://stackoverflow.com/questions/13492134/find-all-ip-address-in-a-network
   then send packet with each one.
+    --done.
 
 
 

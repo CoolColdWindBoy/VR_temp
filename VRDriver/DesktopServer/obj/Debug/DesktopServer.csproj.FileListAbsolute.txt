@@ -1,0 +1,11 @@
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\bin\Debug\DesktopServer.exe.config
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\bin\Debug\DesktopServer.exe
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\bin\Debug\DesktopServer.pdb
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\obj\Debug\DesktopServer.csproj.AssemblyReference.cache
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\obj\Debug\DesktopServer.csproj.SuggestedBindingRedirects.cache
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\obj\Debug\DesktopServer.Form1.resources
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\obj\Debug\DesktopServer.Properties.Resources.resources
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\obj\Debug\DesktopServer.csproj.GenerateResource.cache
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\obj\Debug\DesktopServer.csproj.CoreCompileInputs.cache
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\obj\Debug\DesktopServer.exe
+C:\Users\Maverick\3D Objects\VR\VR_temp\VRDriver\DesktopServer\obj\Debug\DesktopServer.pdb
