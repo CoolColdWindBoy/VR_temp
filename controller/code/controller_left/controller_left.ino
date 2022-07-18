@@ -7,8 +7,7 @@ this code makes reference to HadesVR-main
 #include <WiFi.h>
 #include <WiFiUdp.h>
 //change these two libs for your mpu
-#include "I2Cdev.h"
-#include "MPU6050.h"
+#include <basicMPU6050.h> 
 
 //what this this esp used for?
 String device = "controllerLeft";
@@ -37,8 +36,8 @@ String device = "controllerLeft";
 #define mpuAddress 0x68 //there is no point for me to define address
 //                        because my mpu6050 library did it for me.
 //                        you may have to do this manually.
-char* ssid = "CMCC-yy2k";
-char* password = "18088696966";
+const char* ssid = "CMCC-yy2k";
+const char* password = "18088696966";
 unsigned int UDPPort = 4210;
 
 
@@ -71,20 +70,29 @@ void UDPSend(String data){
 
 
 
-int16_t ax,ay,az,gx,gy,gz;//a is for accelleration, g is for rotation
+float ax,ay,az,gx,gy,gz;//a is for accelleration, g is for rotation
 /*---------------------------------------------------------------
 this is custom mpu part, please modify setup and loop code here*/
-MPU6050 mpu;
+basicMPU6050<> mpu;
 void mpuSetup(){
-  Wire.begin(IIC_SDA,IIC_SCL);//problematic
-  mpu.initialize();
+  mpu.setup(IIC_SDA,IIC_SCL);
+  mpu.setBias();
+  /*
   while(!mpu.testConnection()){
     UDPSend("[mpuerror]");//keep this in your code to inform if there is no mpu dected
     delay(100);
   }
+  */
 }
 void mpuLoop(){
-  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+  mpu.updateBias();
+  //mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+  ax=mpu.ax();
+  ay=mpu.ay();
+  az=mpu.az();
+  gx=mpu.gx();
+  gy=mpu.gy();
+  gz=mpu.gz();
 }
 /*custom coding end
 -------------------------------------------------------------------
@@ -98,7 +106,7 @@ void mpuLoop(){
 
 
 void initWiFi(){
-  WiFi.mode(WIFI_STA);
+  //WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     if(debug){
@@ -122,7 +130,7 @@ void setup(){
   //firstly establish wifi connection
   initWiFi();
   UDP.begin(UDPPort);
-  //mpuSetup();
+  mpuSetup();
   /*
   pinMode(TrackPadX,INPUT);
   pinMode(TrackPadY,INPUT);
@@ -183,8 +191,10 @@ void loop(){
       }
     }
   }
-  //mpuLoop();
-  //UDPSend("[mpu]"+String(ax)+","+String(ay)+","+String(az)+","+String(gx)+","+String(gy)+","+String(gz));
+  mpuLoop();
+  if(UDPConnected){
+    UDPSend("[mpu]"+String(ax)+","+String(ay)+","+String(az)+","+String(gx)+","+String(gy)+","+String(gz));
+  }
   if(currentMillis - previousMillisRssi>=intervalRssi){
     UDPSend("[Rssi]"+String(WiFi.RSSI()));
     previousMillisRssi = currentMillis;

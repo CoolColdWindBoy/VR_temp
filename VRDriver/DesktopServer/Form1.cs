@@ -242,9 +242,9 @@ namespace DesktopServer
                     if (ip == ips.ip[i])
                     {
                         int Rssi= Int32.Parse(content);
-                        if (Rssi < 0 && Rssi > -70)
+                        if (Rssi < 0 && Rssi > -50)
                         {
-                            Rssi = 20;
+                            Rssi = 40;
                         }
                         else if (Rssi < -90)
                         {
@@ -261,9 +261,9 @@ namespace DesktopServer
                         if (Rssi < 0)
                         {
                             Rssi = 0;
-                        }else if (Rssi > 20)
+                        }else if (Rssi > 40)
                         {
-                            Rssi = 20;
+                            Rssi = 40;
                         }
 
                         string deviceName=ips.deviceName[i];
@@ -279,6 +279,19 @@ namespace DesktopServer
                         break;
                     }
                 }
+            }else if (type == "mpu")
+            {
+                string[] datas = new string[6];
+                datas = content.Split(',');
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    label1.Text= datas[0];
+                    label2.Text= datas[1];
+                    label3.Text= datas[2];
+                    label4.Text= datas[3];
+                    label5.Text= datas[4];
+                    label6.Text= datas[5];
+                }));
             }
                 
         }
