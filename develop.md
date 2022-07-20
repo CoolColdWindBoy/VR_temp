@@ -1,7 +1,26 @@
 progress:
+0%
 
 
 
+device list:
+  head
+  shoulderLeft
+  shoulderRight
+  elbowLeft
+  elbowRight
+  wristLeft
+  wristRight
+  controllerLeft
+  controllerRight
+  shoulder
+  hip
+  kneeLeft
+  kneeRight
+  ankleLeft
+  ankleRight
+  feetRight
+  feetRight
 
 
 

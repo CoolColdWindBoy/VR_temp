@@ -37,36 +37,38 @@
             this.timerDetectLocalIP = new System.Windows.Forms.Timer(this.components);
             this.labelControllerLeft = new System.Windows.Forms.Label();
             this.progressBarControllerLeft = new System.Windows.Forms.ProgressBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.DimGray;
+            this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(681, 51);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 35);
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.DimGray;
+            this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Location = new System.Drawing.Point(681, 92);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(89, 35);
             this.button2.TabIndex = 1;
             this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.Color.Black;
+            this.textBox1.ForeColor = System.Drawing.Color.White;
             this.textBox1.Location = new System.Drawing.Point(12, 103);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -94,7 +96,9 @@
             // labelControllerLeft
             // 
             this.labelControllerLeft.AutoSize = true;
-            this.labelControllerLeft.Location = new System.Drawing.Point(314, 82);
+            this.labelControllerLeft.BackColor = System.Drawing.Color.Black;
+            this.labelControllerLeft.ForeColor = System.Drawing.Color.White;
+            this.labelControllerLeft.Location = new System.Drawing.Point(33, 16);
             this.labelControllerLeft.Name = "labelControllerLeft";
             this.labelControllerLeft.Size = new System.Drawing.Size(68, 13);
             this.labelControllerLeft.TabIndex = 3;
@@ -102,77 +106,33 @@
             // 
             // progressBarControllerLeft
             // 
-            this.progressBarControllerLeft.Location = new System.Drawing.Point(388, 82);
+            this.progressBarControllerLeft.BackColor = System.Drawing.Color.Black;
+            this.progressBarControllerLeft.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.progressBarControllerLeft.Location = new System.Drawing.Point(108, 16);
             this.progressBarControllerLeft.Maximum = 40;
             this.progressBarControllerLeft.Name = "progressBarControllerLeft";
             this.progressBarControllerLeft.Size = new System.Drawing.Size(103, 13);
+            this.progressBarControllerLeft.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBarControllerLeft.TabIndex = 4;
+            this.progressBarControllerLeft.Value = 20;
             // 
-            // label1
+            // pictureBox1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(385, 149);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(385, 162);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "label2";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(385, 175);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "label3";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(385, 188);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "label4";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(385, 201);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "label5";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(385, 214);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "label6";
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pictureBox1.Location = new System.Drawing.Point(246, 16);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(400, 416);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.progressBarControllerLeft);
             this.Controls.Add(this.labelControllerLeft);
             this.Controls.Add(this.textBox1);
@@ -181,6 +141,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,12 +157,7 @@
         private System.Windows.Forms.Timer timerDetectLocalIP;
         private System.Windows.Forms.Label labelControllerLeft;
         private System.Windows.Forms.ProgressBar progressBarControllerLeft;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

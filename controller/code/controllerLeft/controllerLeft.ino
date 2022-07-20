@@ -7,7 +7,8 @@ this code makes reference to HadesVR-main
 #include <WiFi.h>
 #include <WiFiUdp.h>
 //change these two libs for your mpu
-#include <basicMPU6050.h> 
+#include <Adafruit_MPU6050.h>
+#include <Adafruit_Sensor.h>
 
 //what this this esp used for?
 String device = "controllerLeft";
@@ -36,7 +37,7 @@ String device = "controllerLeft";
 #define mpuAddress 0x68 //there is no point for me to define address
 //                        because my mpu6050 library did it for me.
 //                        you may have to do this manually.
-const char* ssid = "CMCC-yy2k";
+const char* ssid = "CMCC_yy2k";
 const char* password = "18088696966";
 unsigned int UDPPort = 4210;
 
@@ -70,13 +71,22 @@ void UDPSend(String data){
 
 
 
-float ax,ay,az,gx,gy,gz;//a is for accelleration, g is for rotation
 /*---------------------------------------------------------------
 this is custom mpu part, please modify setup and loop code here*/
-basicMPU6050<> mpu;
+Adafruit_MPU6050 mpu;
+float pitch=0;
+float z=0;
 void mpuSetup(){
-  mpu.setup(IIC_SDA,IIC_SCL);
-  mpu.setBias();
+  UDPSend("[mpuconnecting]");
+  while(!mpu.begin())
+  {
+    UDPSend("[mpuerror]");
+    delay(500);
+  }
+  UDPSend("[mpuconnected]");
+  mpu.setAccelerometerRange(MPU6050_RANGE_2_G);
+  mpu.setGyroRange(MPU6050_RANGE_500_DEG);
+  mpu.setFilterBandwidth(MPU6050_BAND_5_HZ);
   /*
   while(!mpu.testConnection()){
     UDPSend("[mpuerror]");//keep this in your code to inform if there is no mpu dected
@@ -85,6 +95,7 @@ void mpuSetup(){
   */
 }
 void mpuLoop(){
+  /*
   mpu.updateBias();
   //mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
   ax=mpu.ax();
@@ -93,6 +104,14 @@ void mpuLoop(){
   gx=mpu.gx();
   gy=mpu.gy();
   gz=mpu.gz();
+  */
+  sensors_event_t a,g,temp;
+  mpu.getEvent(&a,&g,&temp);
+  float ax,ay,az;
+  ax=a.acceleration.x;
+  ay=a.acceleration.y;
+  az=a.acceleration.z;
+  pitch=-atan2(sqrt(ax*ax+ay*ay),az)*180.0/M_PI;
 }
 /*custom coding end
 -------------------------------------------------------------------
@@ -136,7 +155,7 @@ void setup(){
   pinMode(TrackPadY,INPUT);
   pinMode(TrackPadBtn,INPUT_PULLUP);
   pinMode(JoyX,INPUT);
-  pinMode(JoyY,INPUT);
+  pinMode(JoyY,INPUT);//
   pinMode(JoyBtn,INPUT_PULLUP);
   pinMode(FingerMiddleBtn,INPUT_PULLUP);
   pinMode(FingerRingBtn,INPUT_PULLUP);
@@ -166,7 +185,7 @@ void loop(){
       delay(200);
     }
     if(debug){
-      Serial.println('.');
+      Serial.println('!');
     }
     previousMillisWiFi = currentMillis;
   }
@@ -193,7 +212,7 @@ void loop(){
   }
   mpuLoop();
   if(UDPConnected){
-    UDPSend("[mpu]"+String(ax)+","+String(ay)+","+String(az)+","+String(gx)+","+String(gy)+","+String(gz));
+    UDPSend("[mpu]"+String(pitch)+","+String(z));
   }
   if(currentMillis - previousMillisRssi>=intervalRssi){
     UDPSend("[Rssi]"+String(WiFi.RSSI()));
@@ -201,5 +220,5 @@ void loop(){
   }
   //UDPSend("[digital]"+String(digitalRead(TrackPadBtn))+String(digitalRead(JoyBtn))+String(digitalRead(FingerMiddleBtn))+String(digitalRead(FingerRingBtn))+String(digitalRead(FingerPinkyBtn))+String(digitalRead(BBtn))+String(digitalRead(ABtn))+String(digitalRead(SystemBtn)));
   //UDPSend("[analog]"+String(analogRead(TrackPadX))+","+String(analogRead(TrackPadY))+","+String(analogRead(JoyX))+","+String(analogRead(JoyY))+","+String(analogRead(Bat))+","+String(analogRead(Trigger)));
-  delay(50);
+  delay(100);
 }
